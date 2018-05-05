@@ -2,6 +2,7 @@
  import './App.css';
  import axios from "axios";
  import ToggleButton from "./ToggleButton"
+ import no_photo from "../image/no-user-image.png"
 
  class App extends React.Component {
    constructor(props) {
@@ -25,7 +26,7 @@
           job: c.job_title,
           age: "Age: " + c.age + " yrs",
           height: "Height: " + c.height_in_cm + " cm",
-          photo: c.main_photo,
+          photo: (this.state.hasPhoto? c.main_photo : no_photo),
           religion: "Religion: "+ c.religion,
           city: "City: " + c.city.name
         };
