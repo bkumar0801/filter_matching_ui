@@ -1,0 +1,109 @@
+#root {
+  margin: 1em auto;
+  width: 650px;
+}
+
+.profile {
+  background:#F5F5F5;
+  padding: 20px;
+  margin: 10px 0 10px 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+.filter {
+   padding: 10px;
+   width: 40%;
+   background: #f0f0f0;
+   display: block;
+}
+
+.content {
+  margin-left: 15px;
+  font: bold 13px/25px Georgia, serif;
+  display: block;
+}
+
+.job-title {
+  text-align: left;
+  font: 10px/15px Georgia, serif;
+  display: block;
+  margin-left: 15px;
+}
+
+.App {
+  text-align: left;
+}
+
+.img-circular{
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+}
+
+.display-job {
+    display: inline-block;
+    vertical-align: middle;
+    padding-right:20px;
+    width:150px;
+}
+.age-height{
+    display: inline-block;
+    vertical-align: middle;
+    padding-right:20px;
+    padding-left:10px;
+    border-left:1px solid grey;
+    width:150px;
+}
+.religion-city {
+    display: inline-block;
+    vertical-align: middle;
+    padding-right:20px;
+    padding-left:10px;
+    border-left:1px solid grey;
+    width:150px;
+}
+
+
+nav {
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #F5F5F5;
+}
+
+main {
+  margin: 10px;
+  background: White;
+}
+
+.main-content {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  height: 3000px;
+  background: rgba(white, .5);
+}
+
+sidebar {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-top: 50px;
+  position: sticky;
+  top: 80px;
+  background: #F5F5F5;
+}
+
+.section-label {
+  background: salmon;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #333;
+}
