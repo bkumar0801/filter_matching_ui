@@ -1,6 +1,6 @@
 #root {
   margin: 1em auto;
-  width: 650px;
+  width: 100%;
 }
 
 .profile {
@@ -10,11 +10,19 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
 }
 
-.filter {
-   padding: 10px;
-   width: 40%;
-   background: #f0f0f0;
-   display: block;
+.filterContainer{
+  width: 27%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 10px;
+  margin-top: 10px;
+}
+.filterHeader{
+  background: gray;
+    vertical-align: middle;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
 }
 
 .content {
@@ -48,23 +56,14 @@
     padding-right:20px;
     width:150px;
 }
-.age-height{
+.extra-content{
     display: inline-block;
     vertical-align: middle;
     padding-right:20px;
     padding-left:10px;
     border-left:1px solid grey;
-    width:150px;
+    width:200px;
 }
-.religion-city {
-    display: inline-block;
-    vertical-align: middle;
-    padding-right:20px;
-    padding-left:10px;
-    border-left:1px solid grey;
-    width:150px;
-}
-
 
 nav {
   display: flex;
@@ -80,6 +79,8 @@ nav {
 main {
   margin: 10px;
   background: White;
+  width: 70%;
+  display: inline-block;
 }
 
 .main-content {
@@ -95,10 +96,9 @@ sidebar {
   justify-content: center;
   align-items: center;
   height: 200px;
-  margin-top: 50px;
-  position: sticky;
-  top: 80px;
   background: #F5F5F5;
+  font: 13px/25px Georgia, serif;
+  padding: 10px;
 }
 
 .section-label {
@@ -106,4 +106,5 @@ sidebar {
   padding: 5px 10px;
   border-radius: 3px;
   color: #333;
+  font: bold 13px/25px Georgia, serif;
 }
