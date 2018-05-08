@@ -12,27 +12,32 @@
        profiles:[],
        hasPhoto: "true",
        inContact: "true",
-       favourite: "true"
+       favourite: "true",
+       age: 18
       };
   }
   
   onPhotoChanged(newState) {
-    this.fetchProfile(newState, this.state.inContact, this.state.favourite);
+    this.fetchProfile(newState, this.state.inContact, this.state.favourite, this.state.age);
   }
 
   onContactChanged(newState) {
-    this.fetchProfile(this.state.hasPhoto, newState, this.state.favourite);
+    this.fetchProfile(this.state.hasPhoto, newState, this.state.favourite, this.state.age);
   }
 
   onFavouriteChanged(newState) {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, newState);
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, newState, this.state.age);
+  }
+
+  onAgeSlide(newState) {
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, newState);
   }
   
-  fetchProfile(hasPhoto, inContact, favourite) { 
+  fetchProfile(hasPhoto, inContact, favourite, age) { 
     axios
     .get("http://localhost:8080/filter?photo="+ (hasPhoto? "true": "false") + 
     "&in_contacts="+ (inContact? "true": "false") + "&favouraite=" + (favourite? "true": "false")
-    +"&compatibility_score=1&age=90&height=210&distance=300")
+    +"&compatibility_score=1"+ "&age=".concat(age) + "&height=210&distance=300")
     .then(response => {
       const newProfiles = response.data.matches.map(c => {
         return {
@@ -48,21 +53,21 @@
         };
       });
       const newState = Object.assign({}, this.state, {profiles: newProfiles, 
-        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite});
+        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, age: age});
       this.setState(newState);
     })
     .catch(error => console.log(error));
   }
 
   componentDidMount() {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite)
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, this.state.age)
   }
 
   render() {
     return (
     <div>
       <nav>
-        <span class="section-label">Profile Matcher</span>
+        <span className="section-label">Profile Matcher</span>
       </nav>
       <div className="filterContainer">
       <h3 className="filterHeader">Filters</h3>
@@ -85,7 +90,9 @@
         <div>
             <label for = "age">
               Age?
-              <RangeSlider/>
+              <RangeSlider
+              initialAge = {this.state.age}
+              callbackParent = {(newState) => this.onAgeSlide(newState)} />
             </label>
         </div>
       </sidebar>
