@@ -14,14 +14,8 @@
        inContact: true,
        favourite: true,
        age: 50,
-       minAge: 18,
-       maxAge: 95,
        compScore: 99,
-       minScore: 1,
-       maxScore: 99,
-       height: 180,
-       minHeight: 135,
-       maxHeight: 210
+       height: 180
       };
   }
 
@@ -114,7 +108,7 @@
             <label for = "age">
               Age (Years) ?
               <RangeSlider
-              initialValue = {this.state.age}  min = {this.state.minAge} max = {this.state.maxAge}
+              initialValue = {this.state.age}  min = {18} max = {95}
               callbackParent = {(newState) => this.onAgeSlide(newState)} />
             </label>
         </div>
@@ -122,7 +116,7 @@
             <label for = "compatibility-score">
               Compatibility Score (%) ?
               <RangeSlider
-              initialValue = {this.state.compScore} min = {this.state.minScore} max = {this.state.maxScore}
+              initialValue = {this.state.compScore} min = {1} max = {99}
               callbackParent = {(newState) => this.onScoreSlide(newState)} />
             </label>
         </div>
@@ -130,7 +124,7 @@
             <label for = "height">
               Height (cm) ?
               <RangeSlider
-              initialValue = {this.state.height} min = {this.state.minHeight} max = {this.state.maxHeight}
+              initialValue = {this.state.height} min = {135} max = {210}
               callbackParent = {(newState) => this.onHeightSlide(newState)} />
             </label>
         </div>
