@@ -10,34 +10,54 @@
      super(props);
      this.state = {
        profiles:[],
-       hasPhoto: "true",
-       inContact: "true",
-       favourite: "true",
-       age: 18
+       hasPhoto: true,
+       inContact: true,
+       favourite: true,
+       age: 50,
+       minAge: 18,
+       maxAge: 95,
+       compScore: 99,
+       minScore: 1,
+       maxScore: 99
       };
+  }
+
+  componentDidMount() {
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, 
+      this.state.age, this.state.compScore)
   }
   
   onPhotoChanged(newState) {
-    this.fetchProfile(newState, this.state.inContact, this.state.favourite, this.state.age);
+    this.fetchProfile(newState, this.state.inContact, this.state.favourite, 
+      this.state.age, this.state.compScore);
   }
 
   onContactChanged(newState) {
-    this.fetchProfile(this.state.hasPhoto, newState, this.state.favourite, this.state.age);
+    this.fetchProfile(this.state.hasPhoto, newState, this.state.favourite, 
+      this.state.age, this.state.compScore);
   }
 
   onFavouriteChanged(newState) {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, newState, this.state.age);
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, newState, 
+      this.state.age, this.state.compScore);
   }
 
   onAgeSlide(newState) {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, newState);
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, 
+      newState, this.state.compScore);
+  }
+  onScoreSlide(newState) {
+    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, 
+      this.state.age, newState);
   }
   
-  fetchProfile(hasPhoto, inContact, favourite, age) { 
-    axios
-    .get("http://localhost:8080/filter?photo="+ (hasPhoto? "true": "false") + 
-    "&in_contacts="+ (inContact? "true": "false") + "&favouraite=" + (favourite? "true": "false")
-    +"&compatibility_score=1"+ "&age=".concat(age) + "&height=210&distance=300")
+  fetchProfile(hasPhoto, inContact, favourite, age, score) { 
+    axios.get("http://localhost:8080/filter?photo="+ 
+    (hasPhoto? "true": "false") + 
+    "&in_contacts="+ (inContact? "true": "false") + 
+    "&favouraite=" + (favourite? "true": "false")
+    +"&compatibility_score=".concat(score/100) + 
+    "&age=".concat(age) + "&height=210&distance=300")
     .then(response => {
       const newProfiles = response.data.matches.map(c => {
         return {
@@ -53,21 +73,17 @@
         };
       });
       const newState = Object.assign({}, this.state, {profiles: newProfiles, 
-        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, age: age});
+        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, age: age, compScore:score});
       this.setState(newState);
     })
     .catch(error => console.log(error));
-  }
-
-  componentDidMount() {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, this.state.age)
   }
 
   render() {
     return (
     <div>
       <nav>
-        <span className="section-label">Profile Matcher</span>
+        <h2 className="section-label">Profile Matcher</h2>
       </nav>
       <div className="filterContainer">
       <h3 className="filterHeader">Filters</h3>
@@ -89,10 +105,18 @@
         </div>
         <div>
             <label for = "age">
-              Age?
+              Age (Years) ?
               <RangeSlider
-              initialAge = {this.state.age}
+              initialValue = {this.state.age}  min = {this.state.minAge} max = {this.state.maxAge}
               callbackParent = {(newState) => this.onAgeSlide(newState)} />
+            </label>
+        </div>
+        <div>
+            <label for = "compatibility-score">
+              Compatibility Score (%) ?
+              <RangeSlider
+              initialValue = {this.state.compScore} min = {this.state.minScore} max = {this.state.maxScore}
+              callbackParent = {(newState) => this.onScoreSlide(newState)} />
             </label>
         </div>
       </sidebar>
