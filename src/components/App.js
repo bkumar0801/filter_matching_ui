@@ -18,48 +18,54 @@
        maxAge: 95,
        compScore: 99,
        minScore: 1,
-       maxScore: 99
+       maxScore: 99,
+       height: 180,
+       minHeight: 135,
+       maxHeight: 210
       };
   }
 
   componentDidMount() {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, 
-      this.state.age, this.state.compScore)
+    this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
+      this.state.age, this.state.compScore, this.state.height)
   }
   
   onPhotoChanged(newState) {
-    this.fetchProfile(newState, this.state.inContact, this.state.favourite, 
-      this.state.age, this.state.compScore);
+    this.fetchApi(newState, this.state.inContact, this.state.favourite,
+      this.state.age, this.state.compScore, this.state.height);
   }
 
   onContactChanged(newState) {
-    this.fetchProfile(this.state.hasPhoto, newState, this.state.favourite, 
-      this.state.age, this.state.compScore);
+    this.fetchApi(this.state.hasPhoto, newState, this.state.favourite,
+      this.state.age, this.state.compScore, this.state.height);
   }
 
   onFavouriteChanged(newState) {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, newState, 
-      this.state.age, this.state.compScore);
+    this.fetchApi(this.state.hasPhoto, this.state.inContact, newState,
+      this.state.age, this.state.compScore, this.state.height);
   }
 
   onAgeSlide(newState) {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, 
-      newState, this.state.compScore);
+    this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
+      newState, this.state.compScore, this.state.height);
   }
   onScoreSlide(newState) {
-    this.fetchProfile(this.state.hasPhoto, this.state.inContact, this.state.favourite, 
-      this.state.age, newState);
+    this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
+      this.state.age, newState, this.state.height);
+  }
+
+  onHeightSlide(newState) {
+    this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
+      this.state.age, this.state.compScore, newState);
   }
   
-  fetchProfile(hasPhoto, inContact, favourite, age, score) { 
-    axios.get("http://localhost:8080/filter?photo="+ 
-    (hasPhoto? "true": "false") + 
-    "&in_contacts="+ (inContact? "true": "false") + 
-    "&favouraite=" + (favourite? "true": "false")
-    +"&compatibility_score=".concat(score/100) + 
-    "&age=".concat(age) + "&height=210&distance=300")
+  fetchApi(hasPhoto, inContact, favourite, age, score, height) { 
+    var uri = "http://localhost:8080/filter?photo="+ (hasPhoto? "true": "false") +
+    "&in_contacts="+ (inContact? "true": "false") + "&favouraite=" + (favourite? "true": "false")+
+    "&compatibility_score=".concat(score/100) + "&age=".concat(age) + "&height=".concat(height) + "&distance=300"
+    axios.get(uri)
     .then(response => {
-      const newProfiles = response.data.matches.map(c => {
+      const newProfiles = response.data.matches === null? [] : response.data.matches.map(c => {
         return {
           displayName: c.display_name,
           job: c.job_title,
@@ -73,7 +79,8 @@
         };
       });
       const newState = Object.assign({}, this.state, {profiles: newProfiles, 
-        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, age: age, compScore:score});
+        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, age: age,
+        height: height, compScore:score});
       this.setState(newState);
     })
     .catch(error => console.log(error));
@@ -119,6 +126,14 @@
               callbackParent = {(newState) => this.onScoreSlide(newState)} />
             </label>
         </div>
+        <div>
+            <label for = "height">
+              Height (cm) ?
+              <RangeSlider
+              initialValue = {this.state.height} min = {this.state.minHeight} max = {this.state.maxHeight}
+              callbackParent = {(newState) => this.onHeightSlide(newState)} />
+            </label>
+        </div>
       </sidebar>
       </div>
       <main>
@@ -133,13 +148,22 @@
 
  class Profiles extends React.Component {
    render() {
-     return (
+     if(this.props.profiles.length !== 0) {
+      return (
        <div className="feed">
          {this.props.profiles.map(c => <Profile displayName={c.displayName} job={c.job}
          age = {c.age} height = {c.height} photo = {c.photo} religion = {c.religion}
          city = {c.city} contact = {c.contact} favourite = {c.favourite} />)}
        </div>
      );
+    }
+    else {
+      return (
+        <div className="section-label">
+          No result found!
+        </div>
+      );
+    }
    }
  }
 

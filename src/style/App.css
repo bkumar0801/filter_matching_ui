@@ -95,16 +95,16 @@ sidebar {
   display: block;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 300px;
   background: #F5F5F5;
   font: 13px/25px Georgia, serif;
   padding: 10px;
 }
 
 .section-label {
-  background: salmon;
+  background: rgb(43, 42, 42);
   padding: 5px 10px;
   border-radius: 3px;
-  color: #333;
+  color: rgb(250, 245, 245);
   font: bold 13px/25px Georgia, serif;
 }
