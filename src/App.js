@@ -55,7 +55,7 @@
   }
   
   fetchApi(hasPhoto, inContact, favourite, age, score, height) { 
-    var uri = "http://localhost:8080/filter?photo="+ (hasPhoto? "true": "false") +
+    var uri = "/filter?photo="+ (hasPhoto? "true": "false") +
     "&in_contacts="+ (inContact? "true": "false") + "&favouraite=" + (favourite? "true": "false")+
     "&compatibility_score=".concat(score/100) + "&age=".concat(age) + "&height=".concat(height) + "&distance=300"
     axios.get(uri)

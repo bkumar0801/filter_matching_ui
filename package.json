@@ -2,6 +2,7 @@
   "name": "filter-matching-ui",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "ajv": "^6.0.0",
     "axios": "^0.17.1",
