@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`class RangeSlider extends _react2.default.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { value: props.initialValue, min: props.min, max: props.max };
+  }
+
+  onChange(e) {
+    this.setState({
+      value: e.currentTarget.value });
+
+    this.props.callbackParent(e.currentTarget.value);
+  }
+
+  render() {
+    return (
+      _react2.default.createElement('div', { __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: this },
+        _react2.default.createElement('input', { type: 'range', name: 'quantity', min: this.state.min, max: this.state.max, onChange: e => this.onChange(e), value: this.state.value, __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this }),
+        _react2.default.createElement('output', { htmlFor: 'quantity', __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this }, this.state.value)));
+
+
+  }} renders and matches our snapshot 1`] = `
+<div>
+  <input
+    max={undefined}
+    min={undefined}
+    name="quantity"
+    onChange={[Function]}
+    type="range"
+    value={undefined}
+  />
+  <output
+    htmlFor="quantity"
+  />
+</div>
+`;
