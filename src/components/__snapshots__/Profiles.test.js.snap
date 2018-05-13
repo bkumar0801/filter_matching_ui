@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`class Profiles extends _react2.default.Component {
+  render() {
+    if (this.props.profiles.length !== 0) {
+      return (
+        _react2.default.createElement('div', { className: 'feed', __source: { fileName: _jsxFileName, lineNumber: 8 }, __self: this },
+          this.props.profiles.map(c => _react2.default.createElement(Profile, { displayName: c.displayName, job: c.job,
+            age: c.age, height: c.height, photo: c.photo, religion: c.religion,
+            city: c.city, contact: c.contact, favourite: c.favourite, score: c.score, __source: { fileName: _jsxFileName, lineNumber: 9 }, __self: this }))));
+
+
+    } else
+    {
+      return (
+        _react2.default.createElement('div', { className: 'section-label', __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: this }, 'No result found!'));
+
+
+
+    }
+  }} renders and matches our snapshot with empty profile 1`] = `
+<div
+  className="section-label"
+>
+  No result found!
+</div>
+`;
+
+exports[`class Profiles extends _react2.default.Component {
+  render() {
+    if (this.props.profiles.length !== 0) {
+      return (
+        _react2.default.createElement('div', { className: 'feed', __source: { fileName: _jsxFileName, lineNumber: 8 }, __self: this },
+          this.props.profiles.map(c => _react2.default.createElement(Profile, { displayName: c.displayName, job: c.job,
+            age: c.age, height: c.height, photo: c.photo, religion: c.religion,
+            city: c.city, contact: c.contact, favourite: c.favourite, score: c.score, __source: { fileName: _jsxFileName, lineNumber: 9 }, __self: this }))));
+
+
+    } else
+    {
+      return (
+        _react2.default.createElement('div', { className: 'section-label', __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: this }, 'No result found!'));
+
+
+
+    }
+  }} renders and matches our snapshot with profile 1`] = `
+<div
+  className="feed"
+>
+  <div
+    className="profile"
+  >
+    <img
+      alt="profile-img"
+      className="img-circular"
+      src="test pic"
+    />
+    <div
+      className="display-job"
+    >
+      <span
+        className="name"
+      >
+        Test
+      </span>
+      <span
+        className="job-title"
+      >
+        Engineer
+      </span>
+    </div>
+    <div
+      className="extra-content"
+    >
+      <span
+        className="content"
+      >
+        Age: 18 yrs
+      </span>
+      <span
+        className="content"
+      >
+        Height: 100 cm
+      </span>
+    </div>
+    <div
+      className="extra-content"
+    >
+      <span
+        className="content"
+      >
+        Religion: Hindu
+      </span>
+      <span
+        className="content"
+      >
+        City: Test
+      </span>
+    </div>
+    <div
+      className="extra-content"
+    >
+      <span
+        className="content"
+      >
+        Contacts Exchanged: 2
+      </span>
+      <span
+        className="content"
+      >
+        Favourite: True
+      </span>
+    </div>
+    <div
+      className="extra-content"
+    >
+      <span
+        className="content"
+      >
+        Compatibility Score: 90%
+      </span>
+    </div>
+  </div>
+</div>
+`;
