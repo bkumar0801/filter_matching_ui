@@ -70,7 +70,8 @@
           religion: "Religion: "+ c.religion,
           city: "City: " + c.city.name,
           contact: "Contacts Exchanged: "+ c.contacts_exchanged,
-          favourite: "Favourite: " + c.favourite
+          favourite: "Favourite: " + c.favourite,
+          score: "Compatibility Score: " + c.compatibility_score *100 + "%"
         };
       });
       const newState = Object.assign({}, this.state, {profiles: newProfiles, 

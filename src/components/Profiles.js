@@ -8,7 +8,7 @@ class Profiles extends React.Component {
         <div className="feed">
           {this.props.profiles.map(c => <Profile displayName={c.displayName} job={c.job}
           age = {c.age} height = {c.height} photo = {c.photo} religion = {c.religion}
-          city = {c.city} contact = {c.contact} favourite = {c.favourite} />)}
+          city = {c.city} contact = {c.contact} favourite = {c.favourite} score = {c.score}/>)}
         </div>
       );
      }
@@ -28,7 +28,7 @@ class Profiles extends React.Component {
      <div className="profile">
        <img src={this.props.photo} className="img-circular" alt="profile-img"/>
        <div className="display-job">
-         <span className="content">{this.props.displayName}</span>
+         <span className="name">{this.props.displayName}</span>
          <span className="job-title">{this.props.job}</span>
        </div>
        <div className="extra-content">
@@ -42,6 +42,9 @@ class Profiles extends React.Component {
        <div className="extra-content">
          <span className="content">{this.props.contact}</span>
          <span className="content">{this.props.favourite}</span>
+       </div>
+       <div className="extra-content">
+         <span className="content">{this.props.score}</span>
        </div>
      </div>)
    }
