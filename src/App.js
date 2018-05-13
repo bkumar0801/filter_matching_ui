@@ -1,10 +1,10 @@
  import React from 'react';
- import '../style/App.css';
+ import './style/App.css';
  import axios from "axios";
- import ToggleButton from "./ToggleButton";
- import RangeSlider from "./RangeSlider";
- import Profiles from "./Profiles";
- import no_photo from "../image/no-user-image.png";
+ import ToggleButton from "./components/ToggleButton";
+ import RangeSlider from "./components/RangeSlider";
+ import Profiles from "./components/Profiles";
+ import no_photo from "./image/no-user-image.png";
 
  class App extends React.Component {
    constructor(props) {

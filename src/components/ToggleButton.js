@@ -1,11 +1,11 @@
 import React from 'react';
 
 class ToggleButton extends React.Component {
-  constructor({ initialChecked }) {
-    super();
-    this.state = { checked: initialChecked }
+  constructor(props) {
+    super(props);
+    this.state = { checked: props.initialChecked }
   }
-  onTextChanged() {
+  onStateChanged() {
     const newState = !this.state.checked;
     this.setState({ checked: newState }); // we update our state
     this.props.callbackParent(newState); // we notify our parent
@@ -14,7 +14,7 @@ class ToggleButton extends React.Component {
     return <label>
     {this.props.text}: <input type="checkbox"
     checked={this.state.checked}
-    onChange={() => this.onTextChanged()}/>
+    onChange={() => this.onStateChanged()}/>
     </label>
   }
 }
