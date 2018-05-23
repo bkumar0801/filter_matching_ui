@@ -32,7 +32,7 @@ describe(Profiles, () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders and matches our snapshot with profile', () => {
+    it('renders and matches our snapshot with one profile', () => {
         const component = renderer.create(<Profiles profiles = {profiles}/>);
         const tree = component.toJSON();
         expect(tree).toMatchSnapshot();

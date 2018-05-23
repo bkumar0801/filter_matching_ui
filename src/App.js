@@ -14,7 +14,8 @@
        hasPhoto: true,
        inContact: true,
        favourite: true,
-       age: 50,
+       minAge: 18,
+       maxAge: 90,
        compScore: 99,
        height: 180
       };
@@ -22,42 +23,49 @@
 
   componentDidMount() {
     this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
-      this.state.age, this.state.compScore, this.state.height)
+      this.state.minAge, this.state.maxAge, this.state.compScore, this.state.height)
   }
   
   onPhotoChanged(newState) {
     this.fetchApi(newState, this.state.inContact, this.state.favourite,
-      this.state.age, this.state.compScore, this.state.height);
+      this.state.minAge, this.state.maxAge, this.state.compScore, this.state.height);
   }
 
   onContactChanged(newState) {
     this.fetchApi(this.state.hasPhoto, newState, this.state.favourite,
-      this.state.age, this.state.compScore, this.state.height);
+      this.state.minAge, this.state.maxAge, this.state.compScore, this.state.height);
   }
 
   onFavouriteChanged(newState) {
     this.fetchApi(this.state.hasPhoto, this.state.inContact, newState,
-      this.state.age, this.state.compScore, this.state.height);
+      this.state.minAge, this.state.maxAge, this.state.compScore, this.state.height);
   }
 
-  onAgeSlide(newState) {
+  onMinAgeSlide(newState) {
     this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
-      newState, this.state.compScore, this.state.height);
+      newState, this.state.maxAge, this.state.compScore, this.state.height);
   }
+
+  onMaxAgeSlide(newState) {
+    this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
+      this.state.minAge, newState, this.state.compScore, this.state.height);
+  }
+
   onScoreSlide(newState) {
     this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
-      this.state.age, newState, this.state.height);
+      this.state.minAge, this.state.maxAge, newState, this.state.height);
   }
 
   onHeightSlide(newState) {
     this.fetchApi(this.state.hasPhoto, this.state.inContact, this.state.favourite,
-      this.state.age, this.state.compScore, newState);
+      this.state.minAge, this.state.maxAge, this.state.compScore, newState);
   }
   
-  fetchApi(hasPhoto, inContact, favourite, age, score, height) { 
+  fetchApi(hasPhoto, inContact, favourite, minAge, maxAge, score, height) { 
     var uri = "/filter?photo="+ (hasPhoto? "true": "false") +
     "&in_contacts="+ (inContact? "true": "false") + "&favouraite=" + (favourite? "true": "false")+
-    "&compatibility_score=".concat(score/100) + "&age=".concat(age) + "&height=".concat(height) + "&distance=300"
+    "&compatibility_score=".concat(score/100) + "&minAge=".concat(minAge) + "&maxAge=".concat(maxAge) +
+    "&height=".concat(height) + "&distance=300"
     axios.get(uri)
     .then(response => {
       const newProfiles = response.data.matches === null? [] : response.data.matches.map(c => {
@@ -75,7 +83,7 @@
         };
       });
       const newState = Object.assign({}, this.state, {profiles: newProfiles, 
-        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, age: age,
+        hasPhoto: hasPhoto, inContact:inContact, favourite: favourite, minAge: minAge, maxAge: maxAge,
         height: height, compScore:score});
       this.setState(newState);
     })
@@ -107,13 +115,22 @@
           callbackParent={(newState) => this.onFavouriteChanged(newState) } />
         </div>
         <div>
-            <label for = "age">
-              Age (Years) ?
+            <label for = "minAge">
+              Min Age (Years) ?
               <RangeSlider
-              initialValue = {this.state.age}  min = {18} max = {95}
-              callbackParent = {(newState) => this.onAgeSlide(newState)} />
+              initialValue = {this.state.minAge}  min = {18} max = {95}
+              callbackParent = {(newState) => this.onMinAgeSlide(newState)} />
             </label>
         </div>
+        <div>
+            <label for = "maxAge">
+              Max Age (Years) ?
+              <RangeSlider
+              initialValue = {this.state.maxAge}  min = {18} max = {95}
+              callbackParent = {(newState) => this.onMaxAgeSlide(newState)} />
+            </label>
+        </div>
+        
         <div>
             <label for = "compatibility-score">
               Compatibility Score (%) ?

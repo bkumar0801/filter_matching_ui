@@ -44,7 +44,7 @@ exports[`class Profiles extends _react2.default.Component {
 
 
     }
-  }} renders and matches our snapshot with profile 1`] = `
+  }} renders and matches our snapshot with one profile 1`] = `
 <div
   className="feed"
 >
